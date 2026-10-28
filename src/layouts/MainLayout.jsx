@@ -1,5 +1,11 @@
-import React from 'react';
-export const MainLayout = ({ children }) => (
-  <div className="dashboard-layout">{children}</div>
-);
-export default MainLayout;
+import React, { useState } from 'react';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Bell, ChevronDown, FileText, Headphones, MapPin, Menu, Tag, X, LogOut } from 'lucide-react';
+import Brand from '../shared/Brand.jsx';
+import LogoutButton from '../components/LogoutButton.jsx';
+import { useAuth } from '../features/auth/AuthContext.jsx';
+export default function MainLayout(){
+ const {session,isGuest,logout}=useAuth(); const navigate=useNavigate(); const [mobileNavOpen,setMobileNavOpen]=useState(false);
+ const nav=[{to:'/upload',label:'Upload & Print',icon:FileText},{to:'/my-orders',label:'My Orders',icon:FileText},{to:'/shops',label:'Find a Shop',icon:MapPin},{to:'/pricing',label:'Pricing',icon:Tag},{to:'/support',label:'Support',icon:Headphones}];
+ return <div className="app-shell"><header className="app-header"><Link to="/home" className="brand-link"><Brand/></Link><button className="app-menu-toggle" aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileNavOpen} onClick={()=>setMobileNavOpen(v=>!v)}>{mobileNavOpen?<X/>:<Menu/>}</button><nav className="top-nav"><NavLink to="/home">Home</NavLink><a href="/home#services">Services</a><a href="/home#how">How It Works</a><NavLink to="/shops">Find a Shop</NavLink><NavLink to="/pricing">Pricing</NavLink><NavLink to="/support">Support</NavLink></nav><div className="user-actions"><button className="icon-button notification-button" title="Notifications"><Bell/><i/></button><button className="profile-button" onClick={()=>navigate('/home')}><span className="avatar">{isGuest?'G':(session?.name?.[0]||'S').toUpperCase()}</span><span>{session?.name||'Guest'}{isGuest&&<small>Guest account</small>}</span><ChevronDown size={16}/></button><LogoutButton/></div></header><div className="app-body"><aside className={`side-nav ${mobileNavOpen?'is-open':''}`} onClick={e=>{if(e.target.closest('a'))setMobileNavOpen(false);}}><div className="side-user"><span className="avatar">{isGuest?'G':(session?.name?.[0]||'S').toUpperCase()}</span><div><strong>{session?.name||'Guest'}</strong><small>{isGuest?'Guest account':'Your workspace'}</small></div></div>{nav.map(({to,label,icon:Icon})=><NavLink key={to} to={to} className={({isActive})=>`side-link ${isActive?'active':''}`}><Icon size={21}/>{label}</NavLink>)}<div className="side-bottom"><div className="help-card"><Headphones/><strong>Need help?</strong><small>We're here for you.</small><NavLink to="/support">Contact support <span>→</span></NavLink></div><button className="side-logout" onClick={()=>{setMobileNavOpen(false);logout();navigate('/auth/login',{replace:true});}}><LogOut size={18}/> Logout</button></div></aside><main className="app-content"><Outlet/></main></div></div>
+}

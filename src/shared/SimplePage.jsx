@@ -1,0 +1,4 @@
+import React from 'react';
+import { ArrowRight, MapPin, Headphones, Tag, FileText } from 'lucide-react';
+import { Link } from 'react-router-dom';
+export default function SimplePage({title,subtitle}){const Icon=title==='Find a Shop'?MapPin:title==='Pricing'?Tag:title==='Support'?Headphones:FileText;return <section className="simple-page"><div className="simple-icon"><Icon size={32}/></div><span className="eyebrow">EASYPRINT</span><h1>{title}</h1><p>{subtitle}</p><div className="simple-placeholder"><Icon size={44}/><h3>{title} workspace</h3><p>This screen is ready for the matching backend feature. The supplied backend currently exposes print-job upload/confirmation, signed download URL, guest receipt tracking and shop registration endpoints.</p><Link className="button button-primary" to="/upload">Go to Upload & Print <ArrowRight size={17}/></Link></div></section>}
