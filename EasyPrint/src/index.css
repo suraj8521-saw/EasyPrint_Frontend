@@ -1,4 +1,0 @@
-@import "tailwindcss";
-
-/* stylelint-disable-next-line at-rule-no-unknown -- Tailwind CSS v4 directive */
-@custom-variant dark (&:where(.dark, .dark *));
