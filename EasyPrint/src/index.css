@@ -1,4 +1,30 @@
-@import "tailwindcss";
 
+@import "tailwindcss";
 /* stylelint-disable-next-line at-rule-no-unknown -- Tailwind CSS v4 directive */
 @custom-variant dark (&:where(.dark, .dark *));
+
+
+/* Fix Chrome Autofill Background */
+
+/* Dark Mode */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #1b273a inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+  border-radius: inherit;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Light Mode */
+html:not(.dark) input:-webkit-autofill,
+html:not(.dark) input:-webkit-autofill:hover,
+html:not(.dark) input:-webkit-autofill:focus,
+html:not(.dark) input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #0f172a !important;
+  caret-color: #0f172a;
+  transition: background-color 9999s ease-in-out 0s;
+}

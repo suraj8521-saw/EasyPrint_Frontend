@@ -66,7 +66,7 @@ const ShopkeeperCard = () => {
       <div className="mt-auto pt-4">
 
         <Link
-          to="/shopkeeper/register"
+          to="/shop/register"
           className="group/btn flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-800 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/25 active:scale-[0.98] sm:text-base"
         >
           Continue as Shopkeeper

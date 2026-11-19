@@ -10,7 +10,7 @@ import Footer from "../components/Footer";
 const LandingPage = () => {
   return (
     <PageBackground>
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="min-h-screen overflow-x-clip text-slate-900 dark:text-white">
         <HeroSection />
         <FeaturesSection />

@@ -1,16 +1,19 @@
-
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import Navbar from "../ui/navbar/Navbar";
 import PageBackground from "../shared/PageBackGround";
 
 const MainLayout = () => {
+  const location = useLocation();
+
+  const isAccountPage =
+    location.pathname === "/account-selection";
+
   return (
     <PageBackground>
-      {/* Dynamic Page Content */}
-      <main className="relative min-h-screen">
-        <Outlet />
-      </main>
+      <Navbar variant={isAccountPage ? "account" : "main"} />
+
+      <Outlet />
     </PageBackground>
   );
 };

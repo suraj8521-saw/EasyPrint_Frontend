@@ -1,14 +1,35 @@
-import React from 'react'
-import PageBackground from '../../../shared/PageBackGround'
+
+import LoginHeader from "../components/LoginHeader";
+import LoginForm from "../components/LoginForm";
+import LoginHero from "../components/LoginHero";
+import LoginBenefits from "../components/LoginBenefits";
 
 const LoginPage = () => {
   return (
-    <div>
-        <PageBackground>
-            page
-        </PageBackground>
-    </div>
-  )
-}
+    <main className="flex min-h-0 w-full flex-1 items-center justify-center overflow-x-hidden px-3 py-2 sm:px-6 lg:px-8">
 
-export default LoginPage
+      {/* Login Card */}
+      <div className="grid w-full max-w-[1125px] grid-cols-1 overflow-hidden rounded-[30px] border border-purple-200/80 bg-white/85 shadow-[0_20px_60px_rgba(124,58,237,0.12)] backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/85 lg:grid-cols-2">
+
+        {/* LEFT - Login Form */}
+        <section className="flex w-full items-center justify-center px-5 py-4 sm:px-8 sm:py-5 lg:px-10 lg:py-5 xl:px-12">
+          <div className="w-full max-w-[480px]">
+            <LoginHeader />
+            <LoginForm />
+          </div>
+        </section>
+
+        {/* RIGHT - Hero + Benefits */}
+        <section className="relative hidden items-center justify-center border-l border-purple-100/80 px-7 py-5 dark:border-slate-700 lg:flex xl:px-9">
+          <div className="w-full max-w-[480px]">
+            <LoginHero />
+            <LoginBenefits />
+          </div>
+        </section>
+
+      </div>
+    </main>
+  );
+};
+
+export default LoginPage;

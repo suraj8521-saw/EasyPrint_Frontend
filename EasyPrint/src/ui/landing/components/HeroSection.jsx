@@ -2,7 +2,7 @@ import { ArrowRight, MapPin, FileText, ShieldCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <section
       id="home"
@@ -11,9 +11,15 @@ const HeroSection = () => {
       {/* Left Content */}
       <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
         {/* Badge */}
-        <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white/80 px-5 py-3 text-xs font-bold tracking-[0.18em] text-slate-500 shadow-sm dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-300">
-          <span className="text-blue-600">✦</span>
-          RECOGNIZED AS A SMART PRINTING PLATFORM
+
+        <div className="mb-6 inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-3 text-center text-[10px] font-bold tracking-[0.12em] text-slate-500 shadow-sm dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-300 sm:gap-3 sm:px-5 sm:text-xs sm:tracking-[0.18em]">
+          <span className="relative -top-2 shrink-0 text-base leading-none text-blue-600 sm:-top-0">
+            ✦
+          </span>
+
+          <span className="leading-tight">
+            RECOGNIZED AS A SMART PRINTING PLATFORM
+          </span>
         </div>
 
         {/* Heading */}
