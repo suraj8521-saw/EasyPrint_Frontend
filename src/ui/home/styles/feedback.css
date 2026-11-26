@@ -1,0 +1,56 @@
+.feedback-track {
+  display: flex;
+  width: max-content;
+  animation-duration: 42s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.feedback-forward {
+  animation-name: feedback-scroll-left;
+}
+
+.feedback-reverse {
+  animation-name: feedback-scroll-right;
+}
+
+/* Desktop mouse hover par pause */
+@media (hover: hover) and (pointer: fine) {
+  .feedback-row:hover .feedback-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Mobile / Tablet tap toggle par pause */
+.feedback-row.is-paused .feedback-track {
+  animation-play-state: paused;
+}
+
+@keyframes feedback-scroll-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes feedback-scroll-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-track {
+    animation: none;
+    transform: none;
+  }
+}

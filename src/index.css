@@ -1,0 +1,124 @@
+@import "tailwindcss";
+/* stylelint-disable-next-line at-rule-no-unknown -- Tailwind CSS v4 directive */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --ep-bg-primary: #ffffff;
+  --ep-bg-surface: #faf8ff;
+  --ep-text-primary: #0f172a;
+  --ep-text-secondary: #475569;
+  --ep-border-subtle: rgba(226, 232, 240, 0.85);
+}
+
+html.dark {
+  color-scheme: dark;
+  --ep-bg-primary: #020617;
+  --ep-bg-surface: #090714;
+  --ep-text-primary: #f8fafc;
+  --ep-text-secondary: #94a3b8;
+  --ep-border-subtle: rgba(30, 41, 59, 0.85);
+}
+
+@layer base {
+  html {
+    width: 100%;
+    overflow-x: clip;
+    background-color: var(--ep-bg-primary);
+    color: var(--ep-text-primary);
+  }
+
+  body {
+    width: 100%;
+    overflow-x: clip;
+    background-color: var(--ep-bg-primary);
+    color: var(--ep-text-primary);
+    @apply min-h-[100dvh];
+  }
+
+  button,
+  a,
+  [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Theme toggle ke waqt synchronous 1-frame switch (Zero async color flash) */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
+/* iOS Safari par overflow aur heavy blur rendering glitches rokne ke liye */
+@supports (-webkit-touch-callout: none) {
+  .overflow-x-hidden {
+    overflow-x: clip !important;
+  }
+
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .blur-2xl,
+  .blur-3xl {
+    filter: blur(20px) !important;
+  }
+}
+
+/* Drawer Slide-In Animation */
+@keyframes drawerSlideIn {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.shop-drawer-enter {
+  animation: drawerSlideIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.activation-plan-glow {
+  box-shadow: 0 0 28px rgba(147, 51, 234, 0.22);
+}
+
+.dark .activation-plan-glow {
+  box-shadow: 0 0 32px rgba(168, 85, 247, 0.28);
+}
+
+/* Fix Chrome Autofill Background */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+  border-radius: inherit;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+html:not(.dark) input:-webkit-autofill,
+html:not(.dark) input:-webkit-autofill:hover,
+html:not(.dark) input:-webkit-autofill:focus,
+html:not(.dark) input:-webkit-autofill:active {
+  -webkit-text-fill-color: #0f172a !important;
+  caret-color: #0f172a;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+
+/* Hide scrollbar cleanly while keeping scroll functional (Laptop/Desktop Sidebar) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
