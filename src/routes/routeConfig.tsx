@@ -7,6 +7,7 @@ import HomePage from "../ui/home/pages/Home";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicAuthRoute from "./PublicAuthRoute";
 import PageLoader from "../shared/loaders/PageLoader";
+import { customerRoutes } from "../features/customer/routes/customerRoutes";
 
 export const preloadAccountSelection = () =>
   import("../features/account-selection/pages/AccountSelection");
@@ -161,6 +162,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  ...customerRoutes,
   {
     path: "*",
     element: <Navigate to="/" replace />,

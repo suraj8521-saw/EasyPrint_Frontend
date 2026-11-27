@@ -6,13 +6,17 @@ import { getDashboardRoute } from "../features/auth/utils/getDashboardRoute";
 
 interface ProtectedRouteProps {
   allowedRoles?: UserRole[];
+  allowGuest?: boolean;
 }
 
-const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
+const ProtectedRoute = ({
+  allowedRoles,
+  allowGuest = false,
+}: ProtectedRouteProps) => {
   const location = useLocation();
   const { user, isAuthenticated, isCheckingAuth } = useAuthSession();
 
-  if (isCheckingAuth && !user) {
+  if (!allowGuest && isCheckingAuth && !user) {
     return (
       <div className="flex min-h-[100dvh] items-center justify-center bg-slate-50 dark:bg-[#090714]">
         <div className="h-10 w-10 animate-spin rounded-full border-4 border-purple-600 border-t-transparent" />
@@ -21,6 +25,9 @@ const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
   }
 
   if (!isAuthenticated || !user) {
+    if (allowGuest) {
+      return <Outlet />;
+    }
     return <Navigate to="/auth/login" state={{ from: location }} replace />;
   }
 

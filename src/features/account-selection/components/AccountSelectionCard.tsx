@@ -20,6 +20,7 @@ export interface AccountSelectionCardProps {
   features: AccountFeatureItem[];
   ctaLabel: string;
   ctaLink: string;
+  onCtaClick?: () => void;
 }
 
 const THEME_STYLES: Record<
@@ -72,8 +73,11 @@ const AccountSelectionCard = ({
   features,
   ctaLabel,
   ctaLink,
+  onCtaClick,
 }: AccountSelectionCardProps) => {
   const styles = THEME_STYLES[theme];
+
+  const buttonClasses = `group/btn flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl bg-gradient-to-r px-4 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98] sm:text-base ${styles.button}`;
 
   return (
     <article
@@ -117,7 +121,7 @@ const AccountSelectionCard = ({
         {features.map(({ id, label, icon: FeatureIcon }) => (
           <div
             key={id}
-            className={`flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold text-slate-800  sm:text-sm ${styles.pillContainer}`}
+            className={`flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold text-slate-800 sm:text-sm ${styles.pillContainer}`}
           >
             <FeatureIcon
               className={`h-4 w-4 shrink-0 sm:h-[18px] sm:w-[18px] ${styles.pillIcon}`}
@@ -129,16 +133,23 @@ const AccountSelectionCard = ({
       </div>
 
       <div className="mt-auto pt-4">
-        <Link
-          to={ctaLink}
-          className={`group/btn flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r px-4 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98] sm:text-base ${styles.button}`}
-        >
-          <span>{ctaLabel}</span>
-          <ArrowRight
-            className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1 sm:h-[21px] sm:w-[21px]"
-            aria-hidden="true"
-          />
-        </Link>
+        {onCtaClick ? (
+          <button type="button" onClick={onCtaClick} className={buttonClasses}>
+            <span>{ctaLabel}</span>
+            <ArrowRight
+              className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1 sm:h-[21px] sm:w-[21px]"
+              aria-hidden="true"
+            />
+          </button>
+        ) : (
+          <Link to={ctaLink} className={buttonClasses}>
+            <span>{ctaLabel}</span>
+            <ArrowRight
+              className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1 sm:h-[21px] sm:w-[21px]"
+              aria-hidden="true"
+            />
+          </Link>
+        )}
       </div>
     </article>
   );
